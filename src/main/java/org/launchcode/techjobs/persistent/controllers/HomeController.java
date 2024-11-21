@@ -105,6 +105,7 @@ public class HomeController {
         if (optionalJob.isPresent()) {
             Job job = optionalJob.get();
             model.addAttribute("job", job);
+            model.addAttribute("title", "This is adding a job");
             return "view";
         } else {
             // Handle the case where the job is not found
