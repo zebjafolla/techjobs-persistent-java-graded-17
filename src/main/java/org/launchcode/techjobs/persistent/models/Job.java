@@ -3,25 +3,27 @@ package org.launchcode.techjobs.persistent.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Job extends AbstractEntity{
 
     @ManyToOne
-    @JoinColumn(name = "employer_id")
+    @JoinColumn(name="employer_id")
     private Employer employer;
 
-    private String skills;
+    @ManyToMany
+    private List<Skill> skills = new ArrayList<>();
 
 
 
 
     // Initialize the id and value fields.
-    public Job(String aName, Employer anEmployer, String someSkills) {
+    public Job(String aName, Employer anEmployer, List<Skill> theSkills) {
         super.setName(aName);
         this.employer = anEmployer;
-        this.skills = someSkills;
+        this.skills = theSkills;
     }
 
     public Job() {
@@ -37,12 +39,15 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
-    public String getSkills() {
-        return skills;
+    public void addSkill(Skill skill){
+        this.skills.add(skill);
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
 
+    public List<Skill> getSkills() {
+        return skills;
+    }
 }

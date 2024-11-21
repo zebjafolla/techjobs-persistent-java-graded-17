@@ -29,7 +29,7 @@ public class SkillController {
 
         @GetMapping("/")
         public String index(Model model){
-            model.addAttribute("skills", skillRepository.findAll());
+            model.addAttribute("skills", this.skillRepository.findAll());
             return "/";
         }
 
